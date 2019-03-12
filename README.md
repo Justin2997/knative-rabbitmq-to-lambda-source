@@ -28,7 +28,7 @@ For information on what is Knative please see the Knative [documentation](https:
 
 ### Credentials
 
-In the example manifests provided in this repo, the AWS credentials are loaded via a Kubernetes secret named `awscreds` which needs to contain the keys `aws_access_key_id` and `aws_secret_access_key`.
+In the example manifests provided in this repo, the AWS credentials are loaded via a Kubernetes secret named `rabbitmq` which needs to contain the keys `aws_access_key_id` and `aws_secret_access_key`.
 
 ## External ressource
 You can find other lambda source here : https://github.com/triggermesh/knative-lambda-sources. This repo was inspired by them.
