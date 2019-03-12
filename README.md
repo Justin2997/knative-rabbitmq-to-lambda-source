@@ -15,20 +15,11 @@ Most sources have the following structure:
 │   ├── Dockerfile
 │   ├── Gopkg.lock
 │   ├── Gopkg.toml
-│   ├── Makefile
 │   ├── README.md
-│   ├── rabbitmq-source.yaml
-│   ├── main.go
-│   └── main_test.go
+│   ├── source.yaml
+│   ├── main.go│ 
 ```
 
 The code is in `main.go`. The `Dockerfile` shows how the source is containerized and the `rabbitmq-source.yaml` is the `ContainerSource` manifest that you can deploy on your knative cluster.
 
 For information on what is Knative please see the Knative [documentation](https://github.com/knative/docs/tree/master/eventing).
-
-### Credentials
-
-In the example manifests provided in this repo, the AWS credentials are loaded via a Kubernetes secret named `rabbitmq` which needs to contain the keys `aws_access_key_id` and `aws_secret_access_key`.
-
-## External ressource
-You can find other lambda source here : https://github.com/triggermesh/knative-lambda-sources. This repo was inspired by them.
