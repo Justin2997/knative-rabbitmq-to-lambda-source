@@ -35,5 +35,6 @@ Your function need to expose a server endpoint on 8080 port to be able to have t
 - Create Container source with `kubectl apply -f source.yaml`
 
 # TODO 
-  - Support HTTPS
+  - Add Test
   - Better support for dead letter queue
+  - Support HTTPS
