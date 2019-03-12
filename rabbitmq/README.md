@@ -37,4 +37,4 @@ Your function need to expose a server endpoint on 8080 port to be able to have t
 # TODO 
   - Add Test
   - Better support for dead letter queue
-  - Support HTTPS
+  - Support CloudEvent
