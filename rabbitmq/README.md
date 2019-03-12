@@ -1,4 +1,4 @@
-### RABBITMQ Source
+# RABBITMQ Source
 
 # Requis
 This source expects rabbitmq to be running on the same k8s cluster. If you look at the source.yaml file, you'll see that you can pass environnement variable to the `Container Source` : 
