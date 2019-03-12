@@ -48,7 +48,7 @@ func init() {
 
 	RABBITMQ_USER = getEnv("RABBITMQ_USER", "guest")
 	RABBITMQ_PASSWORD = getEnv("RABBITMQ_PASSWORD", "guest")
-	RABBITMQ_PORT = getEnv("RABBITMQ_PORT", "")
+	RABBITMQ_PORT = getEnv("RABBITMQ_PORT", ":5672")
 
 	QUEUECONFIGURATION = amqp.Table{"x-dead-letter-exchange": EXCHANGE_NAME}
 }
@@ -59,7 +59,6 @@ func sendCallBackResponse(reponse Data) {
 
 	debugLog("CallBack Send to " + reponse.Owner)
 	resp, err := http.Post(reponse.Owner, "application/json", bytes.NewBuffer(bytesRepresentation))
-	debugLog("Responce code from callBack : " + strconv.Itoa(resp.StatusCode))
 
 	// If there is a error with the callback
 	if (err != nil || resp.StatusCode != 200) && reponse.Critical {
@@ -122,7 +121,10 @@ func consumeFunctionQueue(ch *amqp.Channel, consumerName string, qName string) {
 func main() {
 	flag.Parse()
 
-	conn, err := amqp.Dial("amqp://" + RABBITMQ_USER + ":" + RABBITMQ_PASSWORD + "@rabbitmq" + RABBITMQ_PORT + "/")
+	amqpConnection := "amqp://" + RABBITMQ_USER + ":" + RABBITMQ_PASSWORD + "@rabbitmq/"
+	debugLog("Connect to RABBIT : " + amqpConnection)
+
+	conn, err := amqp.Dial(amqpConnection)
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
 

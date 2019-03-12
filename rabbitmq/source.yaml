@@ -1,24 +1,37 @@
 
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Channel
+metadata:
+  name: rabbitmq-channel
+spec:
+  provisioner:
+    apiVersion: eventing.knative.dev/v1alpha1
+    kind: ClusterChannelProvisioner
+    name: in-memory-channel
+---
 apiVersion: sources.eventing.knative.dev/v1alpha1
 kind: ContainerSource
 metadata:
-  name: rabbitmq
+  labels:
+    controller-tools.k8s.io: "1.0"
+  name: rabbitmq-evensource
 spec:
-  image: docker.io/justin2997/knative-rabbitmq-event-source-worker:lastest # You can change it to your image
+  image: docker.io/justin2997/knative-rabbitmq-event-source-worker # You can change it to your image
+  imagePullPolicy: Always
   sink:
     apiVersion: eventing.knative.dev/v1alpha1
     kind: Channel
-    name: default
+    name: rabbitmq-channel
   env:
     - name: RABBITMQ_USER
       value: guest
     - name: RABBITMQ_PASSWORD
       value: guest
     - name: RABBITMQ_PORT
-      value: ""
+      value: ":5672"
     - name: CONTAINER_SOURCE_NAME
       value: container1
     - name: DEBUG
-      value: true
+      value: "true"
     - name: EXCHANGE_NAME
       value: knative-exchange
